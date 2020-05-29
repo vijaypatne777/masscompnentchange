@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+	<Dialog id="deleteDialog" class="sapUiContentPadding"  title="{i18n>titleDelete}" draggable="true">
+		<content>
+			<Text text="{i18n>deleteCompDialogTxt}"></Text>
+			
+		
+			</content>
+		<beginButton>
+			
+			<Button id="okButtonDelete" press="onOkDeleteComp" text="{i18n>deleteCompYesText}"/>
+		</beginButton>
+		<endButton>
+			<Button id="closeButtonDelete" press="onCancelDeleteComp" text="{i18n>deleteCompNoText}"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
