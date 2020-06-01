@@ -1,0 +1,52 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+	<Dialog id="deleteDialog" class="sapUiContentPadding" title="{i18n>titleDelete}" draggable="true">
+		<content>
+			<Text text="{i18n>deleteCompDialogTxt}"></Text>
+			<!--<Table id="tableDelRev" width="auto" items="{path:'itemModelDelRev>/results'}" noDataText="{worklistView>/tableNoDataText}"
+				busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="false" growingScrollToLoad="true" updateFinished=".onUpdateFinished"
+				mode="None" alternateRowColors="true">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title id="tableHeaderDelRev" text="{worklistView>/worklistTableTitle}" level="H3"/>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column id="nameMaterialDelRev">
+						<Text text="{i18n>material}" id="nameColumnMterialDelRev"/>
+					</Column>
+					<Column id="nameColumnDelRev">
+						<Text text="{i18n>billOfMaterial}" id="nameBillOFMaterialDelRev"/>
+					</Column>
+					<Column id="nameBOMComponentDelRev">
+						<Text text="{i18n>billOfMaterialComp}" id="nameColumnTitleDelRev"/>
+					</Column>
+					<Column id="nameBOMQtyDelRev">
+						<Text text="{i18n>billOfMaterialQty}" id="nameColumnQtyDelRev"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Inactive" press="onPress">
+						<cells>
+							<ObjectIdentifier title="{path:'itemModelDelRev>Material'}"/>
+						</cells>
+						<cells>
+							<ObjectIdentifier title="{path:'itemModelDelRev>BillOfMaterial'}"/>
+						</cells>
+						<cells>
+							<ObjectIdentifier title="{path:'itemModelDelRev>BillOfMaterialComponent'}"/>
+						</cells>
+						<cells>
+							<ObjectIdentifier title="{path:'itemModelDelRev>BillOfMaterialItemQuantity'}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>-->
+		</content>
+		<beginButton>
+			<Button id="okButtonDelete" press="onOkDeleteComp" text="{i18n>deleteCompYesText}"/>
+		</beginButton>
+		<endButton>
+			<Button id="closeButtonDelete" press="onCancelDeleteComp" text="{i18n>deleteCompNoText}"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
