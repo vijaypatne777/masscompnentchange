@@ -1,0 +1,269 @@
+<mvc:View controllerName="com.mass.compchange.zmasscomponentchange.controller.Worklist" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	<semantic:FullscreenPage id="page" navButtonPress="onNavBack" showNavButton="false" title="{i18n>appTitle}">
+		<semantic:content>
+			<VBox class="sapUiSmallMargin">
+				<f:Form id="FormToolbar" editable="true" ariaLabelledBy="Title1">
+					<f:toolbar>
+						<Toolbar id="TB1">
+							<Title id="Title1" text="{i18n>searchMaterial}" level="H4" titleStyle="H4"/>
+							<ToolbarSpacer/>
+						</Toolbar>
+					</f:toolbar>
+					<f:layout>
+						<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
+							emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer ariaLabelledBy="Title2">
+							<f:formElements>
+								<f:FormElement label="{i18n>Material}">
+									<f:fields>
+										<Input id="idMaterial" placeholder="{i18n>placeHoldMaterial}" width="206px" required="true" liveChange="onLiveChangeMaterial" />
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="{i18n>plant}">
+									<f:fields>
+										<Input id="idPlant" placeholder="{i18n>plant}" class="apUiLargeMarginBegin" width="206px" required="true" maxLength="4"
+											liveChange="onLiveChange" />
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="{i18n>BOMUsage}">
+									<f:fields>
+										<HBox>
+											<Input id="idBOMUsage" placeholder="{i18n>BOMUsage}" class="sapUiSmallMarginEnd" width="63px" value="5" maxLength="1" enabled="false"/>
+											<!--<Input id="idBOMUsage3" class="apUiLargeMarginBegin" width="30px" maxLength="1" visible="false"/>-->
+											<Button tooltip="{i18n>Search}" class="sapUiSmallMarginEnd" text="{i18n>Search}" type="Emphasized" width="130%" press="onSearchMaterial"
+												icon="sap-icon://search" iconFirst="true" visible="true"/>
+										</HBox>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+			</VBox>
+			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding" upperCase="false" expandable="false" selectedKey="infoTabKey"
+				headerMode="Inline" select="handleIconTabBarSelect">
+				<items>
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://detail-view" key="infoTabKey" iconColor="Positive" design="Horizontal"
+						text="{i18n>information}" tooltip="{i18n>information}" count="{worklistView>/bomComponentTableCount}">
+						<Table id="table" width="auto" items="{path:'itemModel>/results'}" noDataText="{worklistView>/tableNoDataText}"
+							busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="false" growingScrollToLoad="true" updateFinished=".onUpdateFinished"
+							mode="SingleSelectMaster" selectionChange="onSelectionChange" alternateRowColors="true">
+							<headerToolbar>
+								<OverflowToolbar>
+									<Title id="tableHeader21" text="{worklistView>/worklistTableTitle}" level="H3"/>
+									<ToolbarSpacer/>
+									<SearchField id="searchField21" tooltip="{i18n>worklistSearchTooltip}" search=".onSearch">
+										<layoutData>
+											<OverflowToolbarLayoutData maxWidth="200px" priority="NeverOverflow"/>
+										</layoutData>
+									</SearchField>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns>
+								<Column id="nameMaterialInfo">
+									<Text text="{i18n>material}" id="nameColumnMaterialInfo"/>
+								</Column>
+								<Column id="nameColumnInfo">
+									<Text text="{i18n>billOfMaterial}" id="nameBillOFMaterialInfo"/>
+								</Column>
+								<Column id="nameBOMComponentInfo">
+									<Text text="{i18n>billOfMaterialComp}" id="nameColumnTitleInfo"/>
+								</Column>
+								<Column id="nameBOMQtyInfo">
+									<Text text="{i18n>billOfMaterialQty}" id="nameColumnQtyInfo"/>
+								</Column>
+								<Column id="nameBOMComponentDescInfo" width="450px">
+									<Text text="{i18n>componentdesc}" id="nameColumnTitleDescInfo"/>
+								</Column>
+								<Column id="nameBOMRecCreInfo">
+									<Text text="{i18n>bomitemunit}" id="nameColumnBomCreDateInfo"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem type="Inactive" press="onPress">
+									<cells>
+										<ObjectIdentifier title="{path:'itemModel>Material'}"/>
+									</cells>
+									<cells>
+										<ObjectIdentifier title="{path:'itemModel>BillOfMaterial'}"/>
+										<!--<Input value="{path:'itemModel>BillOfMaterial'}" />-->
+									</cells>
+									<cells>
+										<ObjectIdentifier title="{path:'itemModel>BillOfMaterialComponent'}"/>
+										<!--<Input value="{path:'itemModel>BillOfMaterialComponent'}" />-->
+									</cells>
+									<cells>
+										<ObjectIdentifier title="{path:'itemModel>BillOfMaterialItemQuantity'}"/>
+									</cells>
+									<cells>
+										<ObjectIdentifier title="{path:'itemModel>ComponentDescription'}"/>
+									</cells>
+									<cells>
+										<ObjectIdentifier title="{path:'itemModel>BillOfMaterialItemUnit'}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+					<IconTabSeparator icon="sap-icon://open-command-field"/>
+					<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://write-new" key="replaceCompTabKey" iconColor="Critical" design="Horizontal"
+						text="{i18n>replaceComp}" tooltip="{i18n>replaceComp}" count="{worklistView>/bomComponentTableCount}">
+						<Table id="tableCompReplace" width="auto" items="{path:'itemModelBOMComp>/results' }" noDataText="{worklistView>/tableNoDataText}"
+							busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="false" growingScrollToLoad="true" updateFinished="onUpdateFinishedCompList"
+							alternateRowColors="true" mode="MultiSelect">
+							<headerToolbar>
+								<OverflowToolbar>
+									<Title id="tableHeaderCompReplace" text="{worklistView>/worklistTableTitle}" level="H3"/>
+									<ToolbarSpacer/>
+									<SearchField id="searchFieldCompReplace" tooltip="{i18n>worklistSearchTooltip}" search=".onSearch">
+										<layoutData>
+											<OverflowToolbarLayoutData maxWidth="200px" priority="NeverOverflow"/>
+										</layoutData>
+									</SearchField>
+									<!--<Button tooltip="{i18n>Sort}" text="Expand" type="Emphasized" icon="sap-icon://sort" press="testExpand"/>-->
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns>
+								<Column id="nameMaterialRep">
+									<Text text="{i18n>material}" id="nameColumnMaterialRep"/>
+								</Column>
+								<Column id="nameColumnRep">
+									<Text text="{i18n>billOfMaterial}" id="nameBillOFMaterialRep"/>
+								</Column>
+								<Column id="nameBOMComponentRep">
+									<Text text="{i18n>billOfMaterialComp}" id="nameColumnTitleRep"/>
+								</Column>
+								<Column id="nameBOMComponentEdit">
+									<Text text="{i18n>replacebillOfMaterialComp}" id="nameColumnTitle1Edit"/>
+								</Column>
+								<Column id="nameBOMQtyEdit">
+									<Text text="{i18n>billOfMaterialQty}" id="nameColumnQtyEdit"/>
+								</Column>
+								<Column id="nameBOMQty1Edit">
+									<Text text="{i18n>replacebillOfMaterialQty}" id="nameColumnQty1Edit"/>
+								</Column>
+							<!--	<Column id="nameBOMComponentSalesReleEdit">
+									<Text text="{i18n>bomitemsalesrel}" id="nameColumnTitle1SalesRelEdit"/>
+								</Column>-->
+								<Column id="nameBOMComponentDescEdit" width="20%">
+									<Text text="{i18n>componentdesc}" id="nameColumnTitleDescEdit"/>
+								</Column>
+								<Column id="nameBOMRecCreEdit">
+									<Text text="{i18n>bomitemunit}" id="nameColumnBomCreDateEdit"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem >
+									<cells>
+										<ObjectIdentifier title="{path:'itemModelBOMComp>Material'}"/>
+									</cells>
+									<cells>
+										<!--<ObjectIdentifier title="{path:'itemModel>BillOfMaterial'}"/> -->
+										<ObjectIdentifier title="{path:'itemModelBOMComp>BillOfMaterial'}"/>
+										<!--<Input value="{path:'itemModelBOMComp>BillOfMaterial'}" />-->
+									</cells>
+									<cells>
+										<ObjectIdentifier title="{path:'itemModelBOMComp>BillOfMaterialComponent'}"/>
+									</cells>
+									<cells>
+										<!--<ObjectIdentifier title="{path:'itemModel>BillOfMaterialComponent'}"/>-->
+										<Input id="idEditBomComp" value="{path:'itemModelBOMComp>EditBOMComponent'}" liveChange="onLiveChangeEditBOMComp"/>
+									</cells>
+									<cells>
+										<!--<Input value="{path:'itemModelBOMComp>BillOfMaterialItemQuantity'}" width="50%"/>-->
+										<ObjectIdentifier title="{path:'itemModelBOMComp>BillOfMaterialItemQuantity'}"/>
+									</cells>
+									<cells>
+										<Input value="{path:'itemModelBOMComp>EditBOMQuantity'}" width="50%"/>
+										<!--<ObjectIdentifier title="{path:'itemModelBOMComp>BillOfMaterialItemQuantity'}" />-->
+									</cells>
+									<!--<cells>
+										<ObjectIdentifier title="{path:'itemModelBOMComp>BOMItemIsSalesRelevant'}"/>
+									</cells>-->
+									<cells>
+										<ObjectIdentifier title="{path:'itemModelBOMComp>ComponentDescription'}"/>
+									</cells>
+									<cells>
+										<ObjectIdentifier title="{path:'itemModelBOMComp>BillOfMaterialItemUnit'}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+					<IconTabSeparator icon="sap-icon://open-command-field"/>
+					<IconTabFilter id="iconTabBarFilterDel" icon="sap-icon://delete" key="DelTabKey" iconColor="Negative" design="Horizontal"
+						text="{i18n>DeleteComp}" tooltip="{i18n>DeleteComp}" count="{worklistView>/bomComponentTableCount}">
+						<Table id="tableDel" width="auto" items="{path:'itemModel>/results'}" noDataText="{worklistView>/tableNoDataText}"
+							busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="false" growingScrollToLoad="true" updateFinished=".onUpdateFinished"
+							mode="MultiSelect" selectionChange="onSelectionChangeDel" alternateRowColors="true">
+							<headerToolbar>
+								<OverflowToolbar>
+									<Title id="tableHeaderDel" text="{worklistView>/worklistTableTitle}" level="H3"/>
+									<ToolbarSpacer/>
+									<SearchField id="searchFieldDel" tooltip="{i18n>worklistSearchTooltip}" search=".onSearch">
+										<layoutData>
+											<OverflowToolbarLayoutData maxWidth="200px" priority="NeverOverflow"/>
+										</layoutData>
+									</SearchField>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns>
+								<Column id="nameMaterialDel">
+									<Text text="{i18n>material}" id="nameColumnMterialDel"/>
+								</Column>
+								<Column id="nameColumnDel">
+									<Text text="{i18n>billOfMaterial}" id="nameBillOFMaterialDel"/>
+								</Column>
+								<Column id="nameBOMComponentDel">
+									<Text text="{i18n>billOfMaterialComp}" id="nameColumnTitleDel"/>
+								</Column>
+								<Column id="nameBOMQtyDel">
+									<Text text="{i18n>billOfMaterialQty}" id="nameColumnQtyDel"/>
+								</Column>
+								<Column id="nameBOMComponentDescDel" width="450px">
+									<Text text="{i18n>componentdesc}" id="nameColumnTitleDescDel"/>
+								</Column>
+
+								<Column id="nameBOMRecCreDel">
+									<Text text="{i18n>bomitemunit}" id="nameColumnBomCreDateDel"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem type="Inactive" press="onPress">
+									<cells>
+										<ObjectIdentifier title="{path:'itemModel>Material'}"/>
+									</cells>
+									<cells>
+										<ObjectIdentifier title="{path:'itemModel>BillOfMaterial'}"/>
+										<!--<Input value="{path:'itemModel>BillOfMaterial'}" />-->
+									</cells>
+									<cells>
+										<ObjectIdentifier title="{path:'itemModel>BillOfMaterialComponent'}"/>
+										<!--<Input value="{path:'itemModel>BillOfMaterialComponent'}" />-->
+									</cells>
+									<cells>
+										<ObjectIdentifier title="{path:'itemModel>BillOfMaterialItemQuantity'}"/>
+									</cells>
+									<cells>
+										<ObjectIdentifier title="{path:'itemModel>ComponentDescription'}"/>
+									</cells>
+									<cells>
+										<ObjectIdentifier title="{path:'itemModel>BillOfMaterialItemUnit'}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</semantic:content>
+		<semantic:customFooterContent>
+			<Button id="idUpdateBOMComp" tooltip="{i18n>update}" text="{i18n>update}" type="Accept" width="8%" press="onUpdateBOMComp" visible="false"/>
+			<Button id="idDeleteBOMComp" tooltip="{i18n>delete}" text="{i18n>delete}" type="Reject" width="8%" press="onDeleteBOMComp" visible="false"/>
+		</semantic:customFooterContent>
+	</semantic:FullscreenPage>
+</mvc:View>

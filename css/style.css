@@ -1,0 +1,13 @@
+.sapContrast span.sapMBtnInner.sapMBtnReject {
+    background-color: #cc1919;
+    color: #ffffff;
+    text-shadow: none;
+    border: none;
+}
+
+.sapContrast span.sapMBtnInner.sapMBtnAccept {
+    background-color: #e78c07;
+    color: #ffffff;
+    text-shadow: none;
+    border: none;
+}

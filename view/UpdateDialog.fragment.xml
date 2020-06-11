@@ -1,0 +1,63 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+	<Dialog id="updateDialog" class="sapUiContentPadding" title="{i18n>titleUpdate}" draggable="true">
+		<content>
+			<Text text="{i18n>updateCompDialogTxt}"></Text>
+			<!--<Table id="tableUpdateRev" width="auto" items="{path:'itemModelUpdateRev>/oData'}" noDataText="{worklistView>/tableNoDataText}"
+				busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="false" growingScrollToLoad="true" mode="None" alternateRowColors="true">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title id="tableHeaderUpdateRev" text="{i18n>updateCompDialogTxt}" level="H3"/>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column id="nameMaterialRepRev">
+						<Text text="{i18n>material}" id="nameColumnMaterialRepRev"/>
+					</Column>
+					<Column id="nameColumnRepRev">
+						<Text text="{i18n>billOfMaterial}" id="nameBillOFMaterialRepRev"/>
+					</Column>
+					<Column id="nameBOMComponentRepRev">
+						<Text text="{i18n>billOfMaterialComp}" id="nameColumnTitleRepRev"/>
+					</Column>
+					<Column id="nameBOMComponentEditRev">
+						<Text text="{i18n>replacebillOfMaterialComp}" id="nameColumnTitle1EditRev"/>
+					</Column>
+					<Column id="nameBOMQtyEditRev">
+						<Text text="{i18n>billOfMaterialQty}" id="nameColumnQtyEditRev"/>
+					</Column>
+					<Column id="nameBOMQty1EditRev">
+						<Text text="{i18n>replacebillOfMaterialQty}" id="nameColumnQty1EditRev"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem >
+						<cells>
+							<ObjectIdentifier title="{path:'itemModelUpdateRev>Material'}"/>
+						</cells>
+						<cells>
+							<ObjectIdentifier title="{path:'itemModelUpdateRev>BillOfMaterial'}"/>
+						</cells>
+						<cells>
+							<ObjectIdentifier title="{path:'itemModelUpdateRev>BillOfMaterialComponent'}"/>
+						</cells>
+						<cells>
+							<Input id="idEditBomCompRev" value="{path:'itemModelUpdateRev>EditBOMComponent'}" enabled="false"/>
+						</cells>
+						<cells>
+							<ObjectIdentifier title="{path:'itemModelUpdateRev>BillOfMaterialItemQuantity'}"/>
+						</cells>
+						<cells>
+							<Input value="{path:'itemModelUpdateRev>EditBOMQuantity'}" width="50%" enabled="false"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>-->
+		</content>
+		<beginButton>
+			<Button id="okButtonUpdate" press="onOkUpdateComp" text="{i18n>updateCompYesText}"/>
+		</beginButton>
+		<endButton>
+			<Button id="closeButtonUpdate" press="onCancelUpdateComp" text="{i18n>updateCompNoText}"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
