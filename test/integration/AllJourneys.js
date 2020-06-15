@@ -1,0 +1,1 @@
+sap.ui.define(["sap/ui/test/Opa5","./arrangements/Startup","./arrangements/FLP","./WorklistJourney","./NavigationJourney","./NotFoundJourney","./ObjectJourney","./FLPIntegrationJourney"],function(e,n,a){"use strict";e.extendConfig({arrangements:new n,assertions:new a,viewNamespace:"com.mass.compchange.zmasscomponentchange.view.",autoWait:true})});
